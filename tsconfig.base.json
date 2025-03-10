@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nestjs-cms/customer": ["libraries/customer/src/index.ts"],
+      "@nestjs-cms/order": ["libraries/order/src/index.ts"],
+      "@nestjs-cms/shared": ["libraries/shared/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
