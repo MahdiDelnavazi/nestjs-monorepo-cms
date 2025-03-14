@@ -16,19 +16,19 @@
 To run the dev server for your app, use:
 
 ```sh
-npx nx serve nestjs-cms
+npx nx serve api
 ```
 
 To create a production bundle:
 
 ```sh
-npx nx build nestjs-cms
+npx nx build api
 ```
 
 To see all available targets to run for a project, run:
 
 ```sh
-npx nx show project nestjs-cms
+npx nx show project api
 ```
 
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
@@ -44,7 +44,7 @@ Use the plugin's generator to create new projects.
 To generate a new application, use:
 
 ```sh
-npx nx g @nx/nest:app demo
+npx nx g @nx/nest:apps demo
 ```
 
 To generate a new library, use:

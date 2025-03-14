@@ -1,10 +1,10 @@
 export default {
-  displayName: 'nestjs-cms',
+  displayName: 'api',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/nestjs-cms',
+  coverageDirectory: '../../coverage/apps/api',
 };
