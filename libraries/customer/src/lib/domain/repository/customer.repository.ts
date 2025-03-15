@@ -1,4 +1,4 @@
-import { Customer } from '@nestjs-cms/customer';
+import { Customer } from '../entity/customer.entity';
 
 export interface CustomerRepository {
   create(customer: Customer): Promise<Customer>;

@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Customer, CustomerRepository } from '@nestjs-cms/customer';
 import { CreateCustomerDto } from '@nestjs-cms/app';
+import { CustomerRepository } from '../repository/customer.repository';
+import { Customer } from '../entity/customer.entity';
 
 // TODO fix import
 @Injectable()

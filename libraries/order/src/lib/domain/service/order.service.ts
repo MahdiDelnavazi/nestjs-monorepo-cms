@@ -1,13 +1,15 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Order, OrderRepository } from '@nestjs-cms/order';
-import { PaymentService } from '@nestjs-cms/shared';
+import { Order } from '../entity/order.entity';
+import { OrderRepository } from '../repository/order.repository';
+import { MockPaymentService } from '@nestjs-cms/shared';
+import { OrderRepositoryImpl } from '../../infrastructure/order.repository.impl';
 
 @Injectable()
 export class OrderService {
   constructor(
-    @Inject('OrderRepository')
+    @Inject(OrderRepositoryImpl)
     private readonly orderRepository: OrderRepository,
-    private readonly paymentService: PaymentService
+    private readonly paymentService: MockPaymentService
   ) {}
 
   async create(order: Order): Promise<Order> {

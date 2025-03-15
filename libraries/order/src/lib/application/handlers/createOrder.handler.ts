@@ -1,5 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OrderService, CreateOrderCommand, Order } from '@nestjs-cms/order';
+import { Order } from '../../domain/entity/order.entity';
+import { OrderService } from '../../domain/service/order.service';
+import { CreateOrderCommand } from '../commands/createOrder.command';
 
 @CommandHandler(CreateOrderCommand)
 export class CreateOrderHandler implements ICommandHandler<CreateOrderCommand> {
