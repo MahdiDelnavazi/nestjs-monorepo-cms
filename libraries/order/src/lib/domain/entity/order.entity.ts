@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Customer } from '@nestjs-cms/customer';
+import { OrderInterface } from '@nestjs-cms/order';
+import { CustomerInterface } from '@nestjs-cms/customer';
 
 @Entity()
-export class Order {
+export class Order implements OrderInterface {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -18,6 +19,6 @@ export class Order {
   @Column({ nullable: true }) // Add this field
   transactionId: string;
 
-  @ManyToOne(() => Customer, (customer) => customer.orders)
-  customer: Customer;
+  @ManyToOne('Customer', 'orders')
+  customer: CustomerInterface;
 }

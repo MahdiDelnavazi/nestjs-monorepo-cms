@@ -20,7 +20,7 @@ import { OrderModule } from '@nestjs-cms/order';
         password: config.get('DB_PASSWORD'),
         database: config.get('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true, // Disable in production
+        synchronize: true,
       }),
     }),
     CustomerModule,

@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { OrderRepository, Order } from '@nestjs-cms/order';
+import { Inject, Injectable } from '@nestjs/common';
+import { Order, OrderRepository } from '@nestjs-cms/order';
 import { PaymentService } from '@nestjs-cms/shared';
 
 @Injectable()
 export class OrderService {
   constructor(
+    @Inject('OrderRepository')
     private readonly orderRepository: OrderRepository,
     private readonly paymentService: PaymentService
   ) {}
@@ -36,7 +37,7 @@ export class OrderService {
     return this.orderRepository.findAll();
   }
 
-  async update(id: string, order: Partial<Order>): Promise<Order> {
+  async update(id: string, order: Partial<Order>): Promise<Order | null> {
     return this.orderRepository.update(id, order);
   }
 

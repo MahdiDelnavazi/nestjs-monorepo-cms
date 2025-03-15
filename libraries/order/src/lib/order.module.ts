@@ -1,15 +1,20 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
-  Order,
   OrderService,
   OrderRepositoryImpl,
   CreateOrderHandler,
+  Order,
 } from '@nestjs-cms/order';
 import { CqrsModule } from '@nestjs/cqrs';
+import { CustomerModule } from '@nestjs-cms/customer';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Order]), CqrsModule],
+  imports: [
+    TypeOrmModule.forFeature([Order]),
+    forwardRef(() => CustomerModule),
+    CqrsModule,
+  ],
   providers: [
     {
       provide: 'OrderRepository',

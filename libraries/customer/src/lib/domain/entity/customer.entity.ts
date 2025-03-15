@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Order } from '@nestjs-cms/order';
+import { CustomerInterface } from '@nestjs-cms/customer';
+import { OrderInterface } from '@nestjs-cms/order';
 
 @Entity()
-export class Customer {
+export class Customer implements CustomerInterface {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -15,8 +16,8 @@ export class Customer {
   @Column()
   password: string;
 
-  @OneToMany(() => Order, (order) => order.customer)
-  orders: Order[];
+  @OneToMany('Order', 'customer')
+  orders: OrderInterface[];
 
   constructor(partial: Partial<Customer>) {
     Object.assign(this, partial);

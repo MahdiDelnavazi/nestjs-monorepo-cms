@@ -8,8 +8,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
+    "module": "commonjs",
+    "target": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
@@ -17,7 +17,8 @@
     "paths": {
       "@nestjs-cms/customer": ["libraries/customer/src/index.ts"],
       "@nestjs-cms/order": ["libraries/order/src/index.ts"],
-      "@nestjs-cms/shared": ["libraries/shared/src/index.ts"]
+      "@nestjs-cms/shared": ["libraries/shared/src/index.ts"],
+      "@nestjs-cms/app": ["apps/api/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

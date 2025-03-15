@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { CustomerService } from '../../../../../libraries/customer/src/lib/domain/service/customer.service';
+import { CustomerService } from '@nestjs-cms/customer';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly customerService: CustomerService,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
 
   async signIn(email: string, password: string) {
