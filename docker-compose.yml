@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # PostgreSQL database
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: your_db_username
+      POSTGRES_PASSWORD: your_db_password
+      POSTGRES_DB: customer_management
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Nest.js application
+  app:
+    build: .
+    container_name: nestjs_app
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: your_db_username
+      DB_PASSWORD: your_db_password
+      DB_NAME: customer_management
+      JWT_SECRET: your_jwt_secret
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+# Volumes for persistent data
+volumes:
+  postgres_data:

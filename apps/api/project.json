@@ -1,7 +1,7 @@
 {
-  "name": "nestjs-cms",
+  "name": "api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/nestjs-cms/src",
+  "sourceRoot": "apps/api/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -22,15 +22,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "nestjs-cms:build",
+        "buildTarget": "api:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "nestjs-cms:build:development"
+          "buildTarget": "api:build:development"
         },
         "production": {
-          "buildTarget": "nestjs-cms:build:production"
+          "buildTarget": "api:build:production"
         }
       }
     },

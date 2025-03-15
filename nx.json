@@ -36,8 +36,7 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
-      },
-      "exclude": ["apps/nestjs-cms-e2e/**/*", "api-e2e/**/*"]
+      }
     }
   ]
 }
