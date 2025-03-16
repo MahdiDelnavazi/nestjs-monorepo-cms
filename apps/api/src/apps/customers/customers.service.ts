@@ -11,17 +11,7 @@ export class CustomersService {
   constructor(private readonly customerService: CustomerService) {}
 
   async findByEmail(email: string): Promise<Customer | null> {
-    const customer = this.customerService.findByEmail(email);
-
-    // check if customer with this email already exists
-    const customerExistence = await this.findByEmail(email);
-    if (customerExistence) {
-      throw new ConflictException(
-        `Customer with Email ${email} already exists`
-      );
-    }
-
-    return customer;
+    return this.customerService.findByEmail(email);
   }
 
   async findAll(): Promise<Customer[]> {
@@ -29,11 +19,7 @@ export class CustomersService {
   }
 
   async findById(id: string): Promise<Customer> {
-    const customer = await this.customerService.findById(id);
-    if (!customer) {
-      throw new NotFoundException(`Customer with ID ${id} not found`);
-    }
-    return customer;
+    return await this.customerService.findById(id);
   }
 
   async update(

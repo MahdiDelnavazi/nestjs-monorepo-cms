@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Order } from '../entity/order.entity';
 import { OrderRepository } from '../repository/order.repository';
 import { MockPaymentService } from '@nestjs-cms/shared';
@@ -13,6 +13,14 @@ export class OrderService {
   ) {}
 
   async create(order: Order): Promise<Order> {
+    return this.orderRepository.create(order);
+  }
+
+  async orderPayment(orderId: string): Promise<Order | null> {
+    const order = await this.findById(orderId);
+    if (!order) {
+    }
+
     // Process payment
     const paymentResult = await this.paymentService.processPayment(
       order.amount,
@@ -26,13 +34,15 @@ export class OrderService {
     } else {
       order.status = 'failed';
     }
-
-    // Save the order
-    return this.orderRepository.create(order);
+    return this.update(orderId, order);
   }
 
-  async findById(id: string): Promise<Order | null> {
-    return this.orderRepository.findById(id);
+  async findById(id: string): Promise<Order> {
+    const order = this.orderRepository.findById(id);
+    if (!order) {
+      throw new NotFoundException(`Order with ID ${id} not found`);
+    }
+    return order;
   }
 
   async findAll(): Promise<Order[]> {

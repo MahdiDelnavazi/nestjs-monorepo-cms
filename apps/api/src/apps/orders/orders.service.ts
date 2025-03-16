@@ -2,17 +2,17 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Order, OrderService } from '@nestjs-cms/order';
 import { CreateOrderDto } from './dto/createOrder.dto';
 import { UpdateOrderDto } from './dto/updateOrder.dto';
-import { CustomersService } from '../customers/customers.service';
+import { CustomerService } from '@nestjs-cms/customer';
 
 @Injectable()
 export class OrdersService {
   constructor(
     private readonly orderService: OrderService,
-    private readonly customersService: CustomersService
+    private readonly customerService: CustomerService
   ) {}
 
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
-    const customer = await this.customersService.findById(
+    const customer = await this.customerService.findById(
       createOrderDto.customerId
     );
 
@@ -28,11 +28,7 @@ export class OrdersService {
   }
 
   async findById(id: string): Promise<Order> {
-    const order = await this.orderService.findById(id);
-    if (!order) {
-      throw new NotFoundException(`Order with ID ${id} not found`);
-    }
-    return order;
+    return await this.orderService.findById(id);
   }
 
   async update(id: string, updateOrderDto: UpdateOrderDto): Promise<Order> {
