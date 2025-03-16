@@ -18,25 +18,25 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
+  @UseGuards(JwtAuthGuard)
   async create(@Body() createOrderDto: CreateOrderDto) {
     return this.ordersService.create(createOrderDto);
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
+  @UseGuards(JwtAuthGuard)
   async findAll() {
     return this.ordersService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
+  @UseGuards(JwtAuthGuard)
   async findById(@Param('id') id: string) {
     return this.ordersService.findById(id);
   }
 
   @Put(':id')
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
+  @UseGuards(JwtAuthGuard)
   async update(
     @Param('id') id: string,
     @Body() updateOrderDto: UpdateOrderDto
@@ -45,7 +45,7 @@ export class OrdersController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
+  @UseGuards(JwtAuthGuard)
   async delete(@Param('id') id: string) {
     return this.ordersService.delete(id);
   }
