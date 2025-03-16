@@ -1,5 +1,5 @@
 export enum OrderPaymentStatus {
-  Paid = 'Paid',
-  NotPaid = 'NotPaid',
-  Failed = 'Failed',
+  Paid = 'paid',
+  NotPaid = 'notPaid',
+  Failed = 'failed',
 }

@@ -27,7 +27,7 @@ export class CustomerService {
   }
 
   async findById(id: string): Promise<Customer | null> {
-    const customer = await this.findById(id);
+    const customer = await this.customerRepository.findById(id);
     if (!customer) {
       throw new NotFoundException(`Customer with ID ${id} not found`);
     }

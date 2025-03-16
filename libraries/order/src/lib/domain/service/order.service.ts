@@ -19,6 +19,9 @@ export class OrderService {
 
   async payment(orderId: string): Promise<Order | null> {
     const order = await this.findById(orderId);
+    if (!order) {
+      return null;
+    }
 
     // Process payment
     const paymentResult = await this.paymentService.processPayment(
@@ -37,7 +40,7 @@ export class OrderService {
     return this.update(orderId, order);
   }
 
-  async findById(id: string): Promise<Order> {
+  async findById(id: string): Promise<Order | null> {
     const order = this.orderRepository.findById(id);
     if (!order) {
       throw new NotFoundException(`Order with ID ${id} not found`);

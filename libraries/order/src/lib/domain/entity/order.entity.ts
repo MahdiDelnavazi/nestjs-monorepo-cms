@@ -20,8 +20,8 @@ export class Order implements OrderInterface {
   @Column('decimal')
   amount: number;
 
-  @Column({ default: OrderPaymentStatus.NotPaid })
-  status: OrderPaymentStatus;
+  @Column({ default: 'notPaid' })
+  status: string;
 
   @Column({ nullable: true })
   transactionId: string;

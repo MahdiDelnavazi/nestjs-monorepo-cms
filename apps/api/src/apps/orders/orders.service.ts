@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Order, OrderPaymentStatus, OrderService } from '@nestjs-cms/order';
+import { Injectable } from '@nestjs/common';
+import { Order, OrderService } from '@nestjs-cms/order';
 import { CreateOrderDto } from './dto/createOrder.dto';
 import { UpdateOrderDto } from './dto/updateOrder.dto';
 import { CustomerService } from '@nestjs-cms/customer';
