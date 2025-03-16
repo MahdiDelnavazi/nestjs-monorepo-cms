@@ -1,23 +1,35 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Customer, CustomerRepository } from '@nestjs-cms/customer';
-import { CreateCustomerDto } from '@nestjs-cms/app';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { UpdateCustomerDto } from './dto/updateCustomer.dto';
+import { Customer, CustomerService } from '@nestjs-cms/customer';
 
 @Injectable()
 export class CustomersService {
-  constructor(private readonly customerRepository: CustomerRepository) {}
+  constructor(private readonly customerService: CustomerService) {}
 
-  async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
-    const customer = new Customer(createCustomerDto);
-    return this.customerRepository.create(customer);
+  async findByEmail(email: string): Promise<Customer | null> {
+    const customer = this.customerService.findByEmail(email);
+
+    // check if customer with this email already exists
+    const customerExistence = await this.findByEmail(email);
+    if (customerExistence) {
+      throw new ConflictException(
+        `Customer with Email ${email} already exists`
+      );
+    }
+
+    return customer;
   }
 
   async findAll(): Promise<Customer[]> {
-    return this.customerRepository.findAll();
+    return this.customerService.findAll();
   }
 
   async findById(id: string): Promise<Customer> {
-    const customer = await this.customerRepository.findById(id);
+    const customer = await this.customerService.findById(id);
     if (!customer) {
       throw new NotFoundException(`Customer with ID ${id} not found`);
     }
@@ -33,10 +45,13 @@ export class CustomersService {
     if (updateCustomerDto.email) customer.email = updateCustomerDto.email;
     if (updateCustomerDto.password)
       customer.password = updateCustomerDto.password; // Hash the password!
-    return this.customerRepository.update(id, customer);
+    return this.customerService.update(id, customer);
   }
 
   async delete(id: string): Promise<void> {
-    await this.customerRepository.delete(id);
+    // check if customer with this email already exists
+    await this.findById(id);
+
+    await this.customerService.delete(id);
   }
 }

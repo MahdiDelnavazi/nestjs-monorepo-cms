@@ -3,12 +3,12 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
-  Post,
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { CreateCustomerDto } from './dto/createCustomer.dto';
 import { CustomersService } from './customers.service';
 import { UpdateCustomerDto } from './dto/updateCustomer.dto';
 import { JwtAuthGuard } from '../auth/guards/jwtAuth.guard';
@@ -16,11 +16,6 @@ import { JwtAuthGuard } from '../auth/guards/jwtAuth.guard';
 @Controller('customers')
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
-
-  @Post()
-  async create(@Body() createCustomerDto: CreateCustomerDto) {
-    return this.customersService.create(createCustomerDto);
-  }
 
   @Get()
   @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
@@ -44,6 +39,7 @@ export class CustomersController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
   async delete(@Param('id') id: string) {
     return this.customersService.delete(id);

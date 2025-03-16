@@ -1,15 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateCustomerDto } from '@nestjs-cms/app';
-import { CustomerRepository } from '../repository/customer.repository';
 import { Customer } from '../entity/customer.entity';
+import { CustomerRepositoryImpl } from '../../infrastructure/customer.repositoty.impl';
 
 // TODO fix import
 @Injectable()
 export class CustomerService {
-  constructor(
-    @Inject('CustomerRepository')
-    private readonly customerRepository: CustomerRepository
-  ) {}
+  constructor(private readonly customerRepository: CustomerRepositoryImpl) {}
 
   async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
     const customer = new Customer(createCustomerDto);

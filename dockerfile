@@ -1,32 +1,49 @@
-FROM node:22.2 AS installer
-WORKDIR /app/
+# Build stage
+FROM node:22.2 AS build
+WORKDIR /app
+
+# Copy package files first to leverage Docker cache
 COPY package*.json ./
-RUN npm install
+# Install Nx globally for build commands
+RUN npm install -g nx
+# Install all dependencies (including dev dependencies needed for build)
+RUN npm ci
 
+# Copy source code with proper Nx workspace structure
+COPY nx.json tsconfig*.json ./
+COPY apps ./apps
+COPY libraries ./libraries
+
+# Copy configuration files
+COPY eslint.config.mjs ./
+COPY .prettierrc .prettierignore ./
+
+# Build the application with Nx
+# Build the application with Nx
+RUN nx build api --prod
+# Production stage
 FROM node:22-slim
-WORKDIR /app/
+WORKDIR /app
 
-COPY --from=installer /app/node_modules /app/node_modules
+# Copy only the necessary files from build stage
+# Copy only the necessary files from build stage
+COPY --from=build /app/dist/apps/api ./dist
 
-COPY . .
+# Copy package files for production dependencies
+COPY --from=build /app/package*.json ./
 
-RUN npm run build
+# Install only production dependencies
+RUN npm ci --only=production
 
-CMD ["node", "dist/apps/api/main.js"]
+# Set NODE_ENV
+ENV NODE_ENV=production
 
-# FROM node:22-alpine AS build
-# WORKDIR /
-# COPY package*.json ./
-# RUN npm ci
-# COPY . .
-#
-# FROM node:22-alpine
-# WORKDIR /
-# COPY package.json package-lock.json* ./
-# RUN npm install
-# COPY --from=build /app/dist ./dist
-# COPY --from=build /app/node_modules ./node_modules
-# COPY --from=build /app/package.json ./package.json
-# RUN npm run build
-# EXPOSE 3000
-# CMD ["npm", "run", "start:prod"]
+# Optional: Run as non-root user for better security
+USER node
+
+# Expose the port your app runs on
+EXPOSE 3000
+
+# Start the application
+# Start the application
+CMD ["node", "dist/main.js"]

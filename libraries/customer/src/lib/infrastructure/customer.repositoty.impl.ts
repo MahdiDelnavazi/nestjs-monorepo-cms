@@ -8,7 +8,7 @@ import { CustomerRepository } from '../domain/repository/customer.repository';
 export class CustomerRepositoryImpl implements CustomerRepository {
   constructor(
     @InjectRepository(Customer)
-    private readonly repository: Repository<Customer>,
+    private readonly repository: Repository<Customer>
   ) {}
 
   async create(customer: Customer): Promise<Customer> {
@@ -27,7 +27,10 @@ export class CustomerRepositoryImpl implements CustomerRepository {
     return this.repository.find();
   }
 
-  async update(id: string, customer: Partial<Customer>): Promise<Customer | null> {
+  async update(
+    id: string,
+    customer: Partial<Customer>
+  ): Promise<Customer | null> {
     await this.repository.update(id, customer);
     return this.findById(id);
   }
