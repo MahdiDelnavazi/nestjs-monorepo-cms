@@ -3,6 +3,7 @@ import { Order } from '../entity/order.entity';
 import { OrderRepository } from '../repository/order.repository';
 import { MockPaymentService } from '@nestjs-cms/shared';
 import { OrderRepositoryImpl } from '../../infrastructure/order.repository.impl';
+import { OrderPaymentStatus } from '../enum/orderPaymentStatus.enum';
 
 @Injectable()
 export class OrderService {
@@ -27,10 +28,10 @@ export class OrderService {
 
     // Update order status and transaction ID
     if (paymentResult.success) {
-      order.status = 'paid';
+      order.status = OrderPaymentStatus.Paid;
       order.transactionId = paymentResult.transactionId;
     } else {
-      order.status = 'failed';
+      order.status = OrderPaymentStatus.Failed;
     }
 
     return this.update(orderId, order);

@@ -5,7 +5,7 @@ import {
   ManyToOne,
   Generated,
 } from 'typeorm';
-import { OrderInterface } from '@nestjs-cms/order';
+import { OrderInterface, OrderPaymentStatus } from '@nestjs-cms/order';
 import { CustomerInterface } from '@nestjs-cms/customer';
 
 @Entity()
@@ -20,10 +20,10 @@ export class Order implements OrderInterface {
   @Column('decimal')
   amount: number;
 
-  @Column({ default: 'pending' })
-  status: string;
+  @Column({ default: OrderPaymentStatus.NotPaid })
+  status: OrderPaymentStatus;
 
-  @Column({ nullable: true }) // Add this field
+  @Column({ nullable: true })
   transactionId: string;
 
   @ManyToOne('Customer', 'orders')

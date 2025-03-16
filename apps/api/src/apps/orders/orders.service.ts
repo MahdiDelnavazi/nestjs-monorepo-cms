@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Order, OrderService } from '@nestjs-cms/order';
+import { Order, OrderPaymentStatus, OrderService } from '@nestjs-cms/order';
 import { CreateOrderDto } from './dto/createOrder.dto';
 import { UpdateOrderDto } from './dto/updateOrder.dto';
 import { CustomerService } from '@nestjs-cms/customer';
@@ -20,7 +20,6 @@ export class OrdersService {
     order.productName = createOrderDto.productName;
     order.amount = createOrderDto.amount;
     order.customer = customer;
-    order.status = 'not-paid';
     return this.orderService.create(order);
   }
 
