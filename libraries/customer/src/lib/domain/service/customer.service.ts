@@ -7,7 +7,6 @@ import { CreateCustomerDto } from '@nestjs-cms/app';
 import { Customer } from '../entity/customer.entity';
 import { CustomerRepositoryImpl } from '../../infrastructure/customer.repositoty.impl';
 
-// TODO fix import
 @Injectable()
 export class CustomerService {
   constructor(private readonly customerRepository: CustomerRepositoryImpl) {}

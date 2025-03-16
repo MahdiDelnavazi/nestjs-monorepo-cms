@@ -10,11 +10,6 @@ import * as path from 'node:path';
 import { Customer } from '@nestjs-cms/customer';
 import { Order } from '@nestjs-cms/order';
 
-console.log('--------------------------------------------');
-console.log(__dirname);
-console.log(path.join(__dirname, './libraries/**/*.entity.{ts,js}'));
-// TODO
-// read envs from Config
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -26,7 +21,6 @@ console.log(path.join(__dirname, './libraries/**/*.entity.{ts,js}'));
         password: Config.Postgresql.DB_PASSWORD,
         database: Config.Postgresql.DB_NAME,
         entities: [Customer, Order],
-        // TODO .env
         synchronize: true,
       }),
     }),

@@ -7,7 +7,7 @@ services:
     depends_on:
       - db
     env_file:
-      - .env
+      - .env.example
     environment:
       DB_HOST: postgres_db
     ports:
@@ -20,7 +20,7 @@ services:
     image: postgres:13
     container_name: postgres_db
     env_file:
-      - .env
+      - .env.example
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
