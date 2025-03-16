@@ -39,6 +39,6 @@ The project is fully dockerized and can be run with a single command: `docker-co
 2. Copy and Ready .env file:
    ```bash
    cp .env.example .env
-3. Run dockerfile
+3. Run compose file
      ```bash
    docker compose up --build
