@@ -18,19 +18,19 @@ export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
   @Get()
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
+  @UseGuards(JwtAuthGuard)
   async findAll() {
     return this.customersService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
+  @UseGuards(JwtAuthGuard)
   async findById(@Param('id') id: string) {
     return this.customersService.findById(id);
   }
 
   @Put(':id')
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
+  @UseGuards(JwtAuthGuard)
   async update(
     @Param('id') id: string,
     @Body() updateCustomerDto: UpdateCustomerDto
@@ -40,7 +40,7 @@ export class CustomersController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT authentication
+  @UseGuards(JwtAuthGuard)
   async delete(@Param('id') id: string) {
     return this.customersService.delete(id);
   }
