@@ -20,7 +20,12 @@ export class OrdersService {
     order.productName = createOrderDto.productName;
     order.amount = createOrderDto.amount;
     order.customer = customer;
+    order.status = 'not-paid';
     return this.orderService.create(order);
+  }
+
+  async payment(orderId: string): Promise<Order | null> {
+    return this.orderService.payment(orderId);
   }
 
   async findAll(): Promise<Order[]> {

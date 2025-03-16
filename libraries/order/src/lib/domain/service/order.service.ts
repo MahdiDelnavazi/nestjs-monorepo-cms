@@ -16,10 +16,8 @@ export class OrderService {
     return this.orderRepository.create(order);
   }
 
-  async orderPayment(orderId: string): Promise<Order | null> {
+  async payment(orderId: string): Promise<Order | null> {
     const order = await this.findById(orderId);
-    if (!order) {
-    }
 
     // Process payment
     const paymentResult = await this.paymentService.processPayment(
@@ -30,10 +28,11 @@ export class OrderService {
     // Update order status and transaction ID
     if (paymentResult.success) {
       order.status = 'paid';
-      order.transactionId = paymentResult.transactionId; // Now this works!
+      order.transactionId = paymentResult.transactionId;
     } else {
       order.status = 'failed';
     }
+
     return this.update(orderId, order);
   }
 

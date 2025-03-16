@@ -23,6 +23,12 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto);
   }
 
+  @Post('/payment/:id')
+  @UseGuards(JwtAuthGuard)
+  async payment(@Param('id') id: string) {
+    return this.ordersService.payment(id);
+  }
+
   @Get()
   @UseGuards(JwtAuthGuard)
   async findAll() {
