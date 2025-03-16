@@ -5,13 +5,14 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './auth.controller';
 import { CustomerModule } from '@nestjs-cms/customer';
+import { Config } from '../../../../../libraries/shared/src/lib/config';
 
 @Module({
   imports: [
     CustomerModule,
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET,
+      secret: Config.JWT_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
   ],
