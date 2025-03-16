@@ -8,8 +8,4 @@ export class UpdateOrderDto {
   @IsOptional()
   @IsNumber()
   amount?: number;
-
-  @IsOptional()
-  @IsString()
-  status?: string;
 }

@@ -40,7 +40,6 @@ export class OrdersService {
     if (updateOrderDto.productName)
       order.productName = updateOrderDto.productName;
     if (updateOrderDto.amount) order.amount = updateOrderDto.amount;
-    if (updateOrderDto.status) order.status = updateOrderDto.status;
     return this.orderService.update(id, order);
   }
 
