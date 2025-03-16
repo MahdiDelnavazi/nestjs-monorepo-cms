@@ -34,7 +34,7 @@ The project is fully dockerized and can be run with a single command: `docker-co
 
 1. Clone the repository:
    ```bash
-   git@github.com:MahdiDelnavazi/nestjs-monorepo-cms.git
+   git clone git@github.com:MahdiDelnavazi/nestjs-monorepo-cms.git
    cd nestjs-monorepo-cms
 2. Copy and Ready .env file:
    ```bash
