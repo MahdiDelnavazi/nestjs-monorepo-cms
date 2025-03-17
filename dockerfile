@@ -19,13 +19,11 @@ COPY eslint.config.mjs ./
 COPY .prettierrc .prettierignore ./
 
 # Build the application with Nx
-# Build the application with Nx
 RUN nx build api --prod
 # Production stage
 FROM node:22-slim
 WORKDIR /app
 
-# Copy only the necessary files from build stage
 # Copy only the necessary files from build stage
 COPY --from=build /app/dist/apps/api ./dist
 
@@ -44,6 +42,5 @@ USER node
 # Expose the port your app runs on
 EXPOSE 3000
 
-# Start the application
 # Start the application
 CMD ["node", "dist/main.js"]
