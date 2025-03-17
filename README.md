@@ -42,3 +42,5 @@ The project is fully dockerized and can be run with a single command: `docker-co
 3. Run compose file
      ```bash
    docker compose up --build
+   
+### postman file is also available in root of project
